@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Clicker</title>
+</head>
+
+<body>
+    <main>
+        <h1>Simple Clicker</h1>
+        <div>click more than 1000000 times!</div>
+        <input type="button" id="button" value="click me!">
+        <div>
+            clicked <span id="counter">0</span> times
+        </div>
+        <div id="error"></div>
+    </main>
+
+
+    <script>
+        // specify websocket server url:port
+        const socket = new WebSocket('ws://{{ WS_URL }}:{{ WS_PORT }}');
+        const counter = document.getElementById('counter')
+        const error = document.getElementById('error')
+
+        socket.addEventListener('open', function (event) {
+            console.log('connect to websocket server!');
+        });
+
+        socket.addEventListener('message', function (event) {
+            const req = JSON.parse(event.data);
+            if (req.error) {
+                error.textContent = req.error
+                return
+            }
+            counter.textContent = req.message
+        });
+
+        const button = document.getElementById('button');
+        button.addEventListener('click', function () {
+            const count = Number(counter.textContent)
+            socket.send(count);
+        });
+    </script>
+</body>
+
+</html>

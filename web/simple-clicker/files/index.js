@@ -1,0 +1,69 @@
+import Fastify from 'fastify'
+const fastify = Fastify({
+    logger: true
+})
+
+import websocketPlugin from '@fastify/websocket';
+import pointOfView from 'point-of-view';
+import Handlebars from 'handlebars';
+
+// change if you use this at production server
+const WS_URL = 'localhost'
+const WS_PORT = '8000'
+
+// click more than 1000000 times!
+const CLICK_MAX = 1000000
+
+function filterInt(value) {
+    if (/^[-+]?(\d+|Infinity)$/.test(value)) {
+        return Number(value)
+    } else {
+        return NaN
+    }
+}
+
+fastify.register(websocketPlugin)
+fastify.register(pointOfView, {
+    engine: {
+        handlebars: Handlebars,
+    },
+});
+
+fastify.register(async function () {
+    fastify.route({
+        method: 'GET',
+        url: '/',
+        handler: (req, reply) => {
+            reply.view('./public/index.hbs', { WS_URL: WS_URL, WS_PORT: WS_PORT })
+        },
+        wsHandler: (conn, req) => {
+            conn.setEncoding('utf-8')
+            conn.socket.on('message', message => {
+                const data = filterInt(message.toString());
+                console.log(data)
+                if (isNaN(data)) {
+                    const reply = {message: null, error: 'not a number'}
+                    conn.socket.send(JSON.stringify(reply))
+                    return
+                }
+                if (data + 1 > CLICK_MAX) {
+                    const reply = {message: null, error: `Flag is: ${process.env.FLAG}`}
+                    conn.socket.send(JSON.stringify(reply))
+                    return
+                }
+                const reply = {message: data+1, error: null}
+                conn.socket.send(JSON.stringify(reply))
+            })
+        }
+    })
+})
+
+const start = async () => {
+    try {
+        await fastify.listen(8000, '0.0.0.0') // dockerの上では0.0.0.0でlistenしてやる必要がある
+    } catch (err) {
+        fastify.log.error(err)
+        process.exit(1)
+    }
+}
+start()
