@@ -7,10 +7,6 @@ import websocketPlugin from '@fastify/websocket';
 import pointOfView from 'point-of-view';
 import Handlebars from 'handlebars';
 
-// change if you use this at production server
-const WS_URL = 'localhost'
-const WS_PORT = '8000'
-
 // click more than 1000000 times!
 const CLICK_MAX = 1000000
 
@@ -34,7 +30,7 @@ fastify.register(async function () {
         method: 'GET',
         url: '/',
         handler: (req, reply) => {
-            reply.view('./public/index.hbs', { WS_URL: WS_URL, WS_PORT: WS_PORT })
+            reply.view('./public/index.hbs');
         },
         wsHandler: (conn, req) => {
             conn.setEncoding('utf-8')

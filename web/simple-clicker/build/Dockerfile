@@ -7,7 +7,7 @@ FROM gcr.io/distroless/nodejs:18
 COPY --from=builder /app/index.js /app/index.js
 COPY --from=builder /app/public /app/public
 COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/scripts /app/scripts
+COPY --from=builder /app/package.json /app/package.json
 WORKDIR /app
 
-CMD ["--experimental-loader", "/app/scripts/loader.mjs", "index.js"]
+CMD ["index.js"]
