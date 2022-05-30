@@ -22,7 +22,7 @@
 
     <script>
         // specify websocket server url:port
-        const socket = new WebSocket('ws://{{ WS_URL }}:{{ WS_PORT }}');
+        const socket = new WebSocket(`ws://${location.host}`);
         const counter = document.getElementById('counter')
         const error = document.getElementById('error')
 
