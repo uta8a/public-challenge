@@ -1,18 +1,17 @@
 {
-  "name": "socket-client",
+  "name": "simple_clicker",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple Click and Get Flag!",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "prod": "FLAG='<censored>' node index.js"
+    "prod": "node index.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fastify/static": "5.0.2",
     "@fastify/websocket": "5.0.0",
-    "fastify": "3.29.0",
-    "handlebars": "4.7.7",
-    "point-of-view": "5.3.0"
+    "fastify": "3.29.0"
   }
 }

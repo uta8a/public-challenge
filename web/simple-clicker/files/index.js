@@ -4,12 +4,8 @@ const fastify = Fastify({
 })
 
 import websocketPlugin from '@fastify/websocket';
-import pointOfView from 'point-of-view';
-import Handlebars from 'handlebars';
-
-// change if you use this at production server
-const WS_URL = 'localhost'
-const WS_PORT = '8000'
+import fastifyStatic from '@fastify/static'
+import * as url from 'url';
 
 // click more than 1000000 times!
 const CLICK_MAX = 1000000
@@ -23,18 +19,14 @@ function filterInt(value) {
 }
 
 fastify.register(websocketPlugin)
-fastify.register(pointOfView, {
-    engine: {
-        handlebars: Handlebars,
-    },
-});
+fastify.register(fastifyStatic, { root: url.fileURLToPath(new URL('.', import.meta.url)) });
 
 fastify.register(async function () {
     fastify.route({
         method: 'GET',
         url: '/',
         handler: (req, reply) => {
-            reply.view('./public/index.hbs', { WS_URL: WS_URL, WS_PORT: WS_PORT })
+            reply.sendFile('./public/index.html');
         },
         wsHandler: (conn, req) => {
             conn.setEncoding('utf-8')
@@ -42,16 +34,16 @@ fastify.register(async function () {
                 const data = filterInt(message.toString());
                 console.log(data)
                 if (isNaN(data)) {
-                    const reply = {message: null, error: 'not a number'}
+                    const reply = { message: null, error: 'not a number' }
                     conn.socket.send(JSON.stringify(reply))
                     return
                 }
                 if (data + 1 > CLICK_MAX) {
-                    const reply = {message: null, error: `Flag is: ${process.env.FLAG}`}
+                    const reply = { message: null, error: `Flag is: ${process.env.FLAG}` }
                     conn.socket.send(JSON.stringify(reply))
                     return
                 }
-                const reply = {message: data+1, error: null}
+                const reply = { message: data + 1, error: null }
                 conn.socket.send(JSON.stringify(reply))
             })
         }
