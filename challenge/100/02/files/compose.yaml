@@ -1,0 +1,9 @@
+services:
+  web:
+    build: ./web
+    restart: unless-stopped
+    init: true
+    environment:
+      - FLAG=ctf{dummy}
+    ports:
+      - ${PORT:-3000}:3000

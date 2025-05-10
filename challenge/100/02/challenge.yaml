@@ -1,0 +1,10 @@
+---
+number: 2
+name: 'Read it again'
+description: >
+  ファイルが読めるサービスをもう一つ作りました
+flag: "ctf{directory_traversal_is_great}"
+tags:
+  - web
+  - directory_traversal
+  - procfs
