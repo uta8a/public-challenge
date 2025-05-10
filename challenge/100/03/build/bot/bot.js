@@ -1,3 +1,4 @@
+/* ref. https://github.com/arkark/my-ctf-challenges/blob/41de771d75d6792d68a48d26ccde2f21757637d9/challenges/202409_IERAE_CTF_2024/web/leakleakleak/challenge/bot/bot.js */
 import puppeteer from "puppeteer";
 
 const FLAG = process.env.FLAG ?? console.log("No flag") ?? process.exit(1);
