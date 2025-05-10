@@ -1,0 +1,7 @@
+---
+name: 'Simple Clicker'
+description: >
+  たくさんクリックしてFlagをゲット
+flag: "ctf{websocket_or_frontend_cheat}"
+tags:
+  - web
