@@ -12,6 +12,6 @@
   "dependencies": {
     "@fastify/static": "5.0.2",
     "@fastify/websocket": "5.0.0",
-    "fastify": "3.29.0"
+    "fastify": "3.29.4"
   }
 }
