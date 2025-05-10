@@ -52,7 +52,7 @@ fastify.register(async function () {
 
 const start = async () => {
     try {
-        await fastify.listen(8000, '0.0.0.0') // dockerの上では0.0.0.0でlistenしてやる必要がある
+        await fastify.listen(3000, '0.0.0.0') // dockerの上では0.0.0.0でlistenしてやる必要がある
     } catch (err) {
         fastify.log.error(err)
         process.exit(1)
