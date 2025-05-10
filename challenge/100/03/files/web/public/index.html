@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>What is your name?</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css" />
+</head>
+
+<body>
+    <main>
+        <h1>What is your name?</h1>
+        <p id="name"></p>
+        <input type="text" id="nameInput" placeholder="Enter your name" />
+        <button id="submitButton">Submit</button>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            if (name) {
+                document.getElementById('name').innerHTML = `Hello, ${decodeURIComponent(name)}!`;
+            } else {
+                document.getElementById('name').innerHTML = 'Hello, stranger!';
+            }
+        });
+        document.getElementById('submitButton').addEventListener('click', () => {
+            location.href = `/?name=${encodeURIComponent(document.getElementById('nameInput').value)}`;
+        });
+    </script>
+</body>
+
+</html>

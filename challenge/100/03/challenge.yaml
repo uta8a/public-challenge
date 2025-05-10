@@ -1,0 +1,9 @@
+---
+number: 3
+name: 'What is your name?'
+description: >
+  名前を教えてね
+flag: "ctf{call_me_xss_master}"
+tags:
+  - web
+  - xss
