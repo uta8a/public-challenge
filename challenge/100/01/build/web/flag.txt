@@ -1,0 +1,1 @@
+ctf{directory_traversal_is_good}

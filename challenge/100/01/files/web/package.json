@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "hono": "^4.7.9",
+        "@hono/node-server": "^1.14.1"
+    },
+    "scripts": {
+        "dev": "node index.js"
+    }
+}

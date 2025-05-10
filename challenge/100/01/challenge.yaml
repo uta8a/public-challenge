@@ -1,0 +1,9 @@
+---
+number: 1
+name: 'Read it'
+description: >
+  ファイルが読めるサービス
+flag: "ctf{directory_traversal_is_good}"
+tags:
+  - web
+  - directory_traversal
