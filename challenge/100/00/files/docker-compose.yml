@@ -5,6 +5,6 @@ services:
       context: .
       dockerfile: ./Dockerfile
     environment:
-      - FLAG=ctf{websocket_or_frontend_cheat}
+      - FLAG=ctf{dummy}
     ports:
       - "3000:3000"
