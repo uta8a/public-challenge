@@ -1,0 +1,19 @@
+services:
+  web:
+    build: ./web
+    restart: unless-stopped
+    init: true
+    ports:
+      - ${PORT:-3000}:3000
+    environment:
+      - ADMIN_PASSWORD=5f85a300c98e346b2d7761458577a8da
+      - ADMIN_GIST_URL=a73c7a10bb39
+      - FLAG=ctf{styling_is_important}
+  bot:
+    build: ./bot
+    restart: unless-stopped
+    init: true
+    ports:
+      - 1337:1337
+    environment:
+      - ADMIN_PASSWORD=5f85a300c98e346b2d7761458577a8da

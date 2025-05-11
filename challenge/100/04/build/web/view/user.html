@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css" type="text/css" />
+    {{ .Stylesheet }}
+</head>
+
+<body>
+    <div>
+        <h2>Profile</h2>
+        <p>Username: {{ .Username }}</p>
+        <a id="gist" href="gist{{ .GistUrl }}">View Gist</a>
+        <form method="get" action="/user?">
+            <label for="stylesheet">Submit Profile Stylesheet:</label>
+            <textarea id="stylesheet" name="stylesheet" rows="10" cols="50" placeholder="h2 {color: green;}"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+---
+number: 4
+name: 'Styling'
+description: >
+  あなたの好きな見た目にしよう
+flag: "ctf{styling_is_important}"
+tags:
+  - web
+  - 'css injection'
